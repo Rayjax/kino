@@ -1,0 +1,12 @@
+D:\Dev\Kino\kino\kino\bin\Debug\kino.exe
+D:\Dev\Kino\kino\kino\bin\Debug\kino.pdb
+D:\Dev\Kino\kino\kino\bin\Debug\MjpegProcessor.dll
+D:\Dev\Kino\kino\kino\obj\x86\Debug\MainWindow.baml
+D:\Dev\Kino\kino\kino\obj\x86\Debug\MainWindow.g.cs
+D:\Dev\Kino\kino\kino\obj\x86\Debug\App.g.cs
+D:\Dev\Kino\kino\kino\obj\x86\Debug\kino_MarkupCompile.cache
+D:\Dev\Kino\kino\kino\obj\x86\Debug\kino.g.resources
+D:\Dev\Kino\kino\kino\obj\x86\Debug\kino.Properties.Resources.resources
+D:\Dev\Kino\kino\kino\obj\x86\Debug\kino.csproj.GenerateResource.Cache
+D:\Dev\Kino\kino\kino\obj\x86\Debug\kino.exe
+D:\Dev\Kino\kino\kino\obj\x86\Debug\kino.pdb
