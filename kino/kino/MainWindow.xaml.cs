@@ -25,6 +25,8 @@ namespace kino
         public MainWindow()
         {
             InitializeComponent();
+
+            //Init a decoder and listen for new frames
             _mjpeg = new MjpegDecoder();
             _mjpeg.FrameReady += mjpeg_FrameReady;
 
@@ -32,6 +34,7 @@ namespace kino
  
         private void mjpeg_FrameReady(object sender, FrameReadyEventArgs e)
         {
+            //Update image on each new frame event
             videoStreamImage.Source = e.BitmapImage;
         }
 
@@ -40,7 +43,7 @@ namespace kino
             //Get URL from input
             String videoStreamURL = textBox_videoStreamURL.Text;
 
-            //Start stream
+            //Set stream url for the decoder (makes the decoding start)
             _mjpeg.ParseStream(new Uri(videoStreamURL));
         }
     }
