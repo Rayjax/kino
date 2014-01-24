@@ -20,11 +20,11 @@ namespace kino
             this.endPoint = new IPEndPoint(serverAddr, targetPort);
         }
 
-        public bool sendMessage(String message){
+        public bool sendMessage(char message){
             bool success = true;
             try
             {
-                byte[] send_buffer = Encoding.ASCII.GetBytes(message);
+                byte[] send_buffer = Encoding.ASCII.GetBytes(message.ToString());
                 this.socket.SendTo(send_buffer, this.endPoint);
             }
             catch (Exception ex)

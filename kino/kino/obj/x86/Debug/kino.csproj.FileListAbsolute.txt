@@ -10,3 +10,4 @@ D:\Dev\Kino\kino\kino\obj\x86\Debug\kino.Properties.Resources.resources
 D:\Dev\Kino\kino\kino\obj\x86\Debug\kino.csproj.GenerateResource.Cache
 D:\Dev\Kino\kino\kino\obj\x86\Debug\kino.exe
 D:\Dev\Kino\kino\kino\obj\x86\Debug\kino.pdb
+D:\Dev\Kino\kino\kino\obj\x86\Debug\kino.csprojResolveAssemblyReference.cache
