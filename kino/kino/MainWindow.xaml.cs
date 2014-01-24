@@ -57,19 +57,50 @@ namespace kino
             _mjpeg.ParseStream(new Uri(videoStreamURL));
         }
 
-        //@todo replace with input from kinect
-        private void forward_Click(object sender, RoutedEventArgs e)
+        private void OnButtonKeyDown(object sender, KeyEventArgs e)
         {
             //Get user entered parameters
             int targetPortCommands = 0;
-           
+
+            int.TryParse(tb_targetPortCommands.Text, out targetPortCommands);
+
+            //Init a commander which will receive commands and send them to Kino
+            this.commander = new Commander(tb_targetIP.Text, targetPortCommands);         {
+                if (e.Key == Key.Up)
+                {
+                    //Send command
+                    this.commander.sendCommand(Command.forward);
+                }
+                else if (e.Key == Key.Down)
+                {
+                    this.commander.sendCommand(Command.backward);
+                }
+                else if (e.Key == Key.Left)
+                {
+                    this.commander.sendCommand(Command.left);
+                }
+                else if (e.Key == Key.Right)
+                {
+                    this.commander.sendCommand(Command.right);
+                }
+                else if (e.Key == Key.S)
+                {
+                    this.commander.sendCommand(Command.stand);
+                }
+            }
+        }
+
+        private void stop_Click(object sender, RoutedEventArgs e)
+        {
+            //Get user entered parameters
+            int targetPortCommands = 0;
+
             int.TryParse(tb_targetPortCommands.Text, out targetPortCommands);
 
             //Init a commander which will receive commands and send them to Kino
             this.commander = new Commander(tb_targetIP.Text, targetPortCommands);
 
-            //Send command
-            this.commander.sendCommand(Command.forward);
+            this.commander.sendCommand(Command.stand);
         }
     }
 }

@@ -16,13 +16,14 @@
                 <ColumnDefinition Width="0*" />
             </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" Content="Target IP Address" Height="28" HorizontalAlignment="Left" Name="lb_targetIP" VerticalAlignment="Top" />
-            <TextBox Grid.Column="1" Height="24" HorizontalAlignment="Right" Name="tb_targetIP"  Width="501"  Text="192.168.43.1" Margin="0,4,6,0" />
+            <TextBox Grid.Column="1" Height="24" HorizontalAlignment="Right" Name="tb_targetIP"  Width="501"  Text="192.168.43.229" Margin="0,4,6,0" />
             <Label Grid.Row="1" Grid.Column="0" Content="Target port for video" Height="28" HorizontalAlignment="Left" Name="lb_targetPortVideo" VerticalAlignment="Top" />
                 <TextBox Grid.Row="1" Grid.Column="1" Height="24" Name="tb_targetPortVideo" Text="8080" Margin="0,4,6,0" />
             <Label Grid.Row="2" Content="Target port for commands" Height="28" HorizontalAlignment="Left" Name="lb_targetPortCommands" VerticalAlignment="Top" />
-                <TextBox Grid.Row="2" Grid.Column="1" Height="24" Name="tb_targetPortCommands" Text="8080" Margin="0,2,6,10" />
+                <TextBox Grid.Row="2" Grid.Column="1" Height="24" Name="tb_targetPortCommands" Text="7778" Margin="0,2,6,10" />
             </Grid>
-            <Button Content="Démarrer le jeu" Height="23" Name="startGameButton" Width="107" Click="button1_Click" Margin="524,616,627,42" />
-            <Button Content="Forward" Height="23" Name="forward" Width="75" Click="forward_Click" Margin="676,616,507,42" />
+            <Button Content="Démarrer le jeu" Height="23" Name="startGameButton" Width="107" Margin="524,616,627,42" />
+        <Button Content="Manual Control" KeyDown="OnButtonKeyDown" Height="23" HorizontalAlignment="Left" Margin="637,616,0,0" Name="manual_control" VerticalAlignment="Top" Width="75" />
+        <Button Content="Stop" Height="23" HorizontalAlignment="Left" Margin="718,616,0,0" Name="stop" VerticalAlignment="Top" Width="75" Click="stop_Click" />
     </Grid>
 </Window>

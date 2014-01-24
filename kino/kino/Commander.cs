@@ -14,10 +14,10 @@ namespace kino
             this.UDPmessager = new UDPmessager(targetIP, targetPort);
             this.UDPmessages = new char[5];
             this.UDPmessages[0] = 's';
-            this.UDPmessages[1] = 'f';
-            this.UDPmessages[2] = 'b';
-            this.UDPmessages[3] = 'l';
-            this.UDPmessages[4] = 'r';
+            this.UDPmessages[1] = 'a';
+            this.UDPmessages[2] = 'r';
+            this.UDPmessages[3] = 'g';
+            this.UDPmessages[4] = 'd';
         }
 
         public bool sendCommand(Command command)
