@@ -61,6 +61,7 @@
     </ApplicationDefinition>
     <Compile Include="Command.cs" />
     <Compile Include="Commander.cs" />
+    <Compile Include="TCPConnection.cs" />
     <Compile Include="UDPmessager.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
