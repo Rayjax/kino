@@ -17,6 +17,7 @@ using System.IO;
 using System.Drawing;
 using System.ComponentModel;
 
+
 namespace kino
 {
     public partial class MainWindow : Window
@@ -24,15 +25,20 @@ namespace kino
         MjpegDecoder _mjpeg;
         Commander commander;
         bool commanderReady;
+        KeyEventHandler keyboardEventHandler;
+        bool listeningToKeyboardEvents;
  
         public MainWindow()
         {
             InitializeComponent();
 
-            //Init a decoder and listen for new frames
+            //Init a decoder for video and listen for new frames
             _mjpeg = new MjpegDecoder();
             _mjpeg.FrameReady += mjpeg_FrameReady;
 
+            //Init an handler for keyboard
+            this.keyboardEventHandler = new KeyEventHandler(OnButtonKeyDown);
+            listeningToKeyboardEvents = false;
         }
 
         private String getVideoStreamUrl(String IPAddress, int port){
@@ -47,25 +53,32 @@ namespace kino
 
         private void OnButtonKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Up)
+            if (this.commanderReady)
             {
-                this.commander.sendCommand(Command.forward);
+                if (e.Key == Key.Up)
+                {
+                    this.commander.sendCommand(Command.forward);
+                }
+                else if (e.Key == Key.Down)
+                {
+                    this.commander.sendCommand(Command.backward);
+                }
+                else if (e.Key == Key.Left)
+                {
+                    this.commander.sendCommand(Command.left);
+                }
+                else if (e.Key == Key.Right)
+                {
+                    this.commander.sendCommand(Command.right);
+                }
+                else if (e.Key == Key.S)
+                {
+                    this.commander.sendCommand(Command.stand);
+                }
             }
-            else if (e.Key == Key.Down)
+            else
             {
-                this.commander.sendCommand(Command.backward);
-            }
-            else if (e.Key == Key.Left)
-            {
-                this.commander.sendCommand(Command.left);
-            }
-            else if (e.Key == Key.Right)
-            {
-                this.commander.sendCommand(Command.right);
-            }
-            else if (e.Key == Key.S)
-            {
-                this.commander.sendCommand(Command.stand);
+                MessageBox.Show("Connectez vous d'abord");
             }
         }
 
@@ -75,7 +88,7 @@ namespace kino
             {
                 if (!this.commander.sendCommand(Command.stand))
                 {
-                    MessageBox.Show("Impossible d'envoyer la commande à Kino. Veuillez vous reconnecter. \n Si le problème persiste, redémarrez l'application et vérifiez les paramètres réseau.");
+                    MessageBox.Show("Impossible d'envoyer la commande à Kino. \n Veuillez vérifier les paramètres réseau et démarrez l'application sur le smartphone.");
                 }
             }
             else
@@ -96,15 +109,8 @@ namespace kino
             //Init a commander which will receive commands and send them to Kino via TCP (transport defined with the boolean)
             this.commander = new Commander(tb_targetIP.Text, targetPortCommands, false);
             this.commanderReady = true;
-            if (!this.commander.clientisConnected)
-            {
-                MessageBox.Show("Impossible de se connecter au smartphone pour le contrôle à distance. \n Veuillez vérifier que cet ordinateur est sur le même réseau \n que celui-ci, et que vous avez entré des paramètres corrects.");
-            }
-            else
-            {
-                MessageBox.Show("Connecté au smartphone. Vous pouvez maintenant contrôler Kino.");
-            }
 
+            //Get video
             MessageBox.Show("L'application va maintenant tenter de récupérer le flux vidéo de la caméra du smartphone. \n Si vous ne voyez pas de vidéo, veuillez vérifier que cet ordinateur est sur le même réseau \n que le smartphone, et que vous avez entré des paramètres corrects.");
 
             //Get URL from input IP
@@ -120,6 +126,28 @@ namespace kino
             if (this.commanderReady)
             {
                 this.commander.closeConnection();
+            }
+        }
+
+        private void manual_control_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.commanderReady)
+            {
+                //Listen to keyboard events
+                if (listeningToKeyboardEvents)
+                {
+                    this.KeyUp -= this.keyboardEventHandler;
+                    listeningToKeyboardEvents = false;
+                }
+                else
+                {
+                    this.KeyUp += this.keyboardEventHandler;
+                    listeningToKeyboardEvents = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Connectez vous d'abord");
             }
         }
     }

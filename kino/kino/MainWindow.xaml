@@ -23,7 +23,7 @@
                 <TextBox Grid.Row="2" Grid.Column="1" Height="24" Name="tb_targetPortCommands" Text="6666" Margin="0,2,6,10" />
             </Grid>
             <Button Content="Se connecter a Kino" Height="23" Name="startGameButton" Margin="275,616,0,42" Click="startGameButton_Click" HorizontalAlignment="Left" Width="155" />
-        <Button Content="Contrôle par le clavier" KeyDown="OnButtonKeyDown" Height="23" HorizontalAlignment="Left" Margin="603,616,0,0" Name="manual_control" VerticalAlignment="Top" Width="129" />
+        <Button Content="Contrôle par le clavier" KeyDown="OnButtonKeyDown" Height="23" HorizontalAlignment="Left" Margin="603,616,0,0" Name="manual_control" VerticalAlignment="Top" Width="129" Click="manual_control_Click" />
         <Button Content="Arrêt d'urgence" Height="23" HorizontalAlignment="Left" Margin="880,616,0,0" Name="stop" VerticalAlignment="Top" Width="114" Click="stop_Click" />
     </Grid>
 </Window>

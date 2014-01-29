@@ -30,12 +30,10 @@ namespace kino
             if (transportIsUDP)
             {
                 this.UDPmessager = new UDPmessager(targetIP, targetPort);
-                this.clientisConnected = true;
             }
             else
             {
-                this.TCPClient = new TCPConnection();
-                this.clientisConnected = this.TCPClient.connect(targetIP, targetPort);
+                this.TCPClient = new TCPConnection(targetIP, targetPort);
             }
         }
 
@@ -54,7 +52,7 @@ namespace kino
             else
             {
                 //Use TCP
-                success = this.TCPClient.sendMessage(message);
+                success = this.TCPClient.connectSendMessageAndDisconnect(message);
             }
             return success;
         }
@@ -63,6 +61,7 @@ namespace kino
         {
             if (!transportIsUDP && clientisConnected)
             {
+                //Disconnect if still connected
                 this.TCPClient.disconnect();
             }
         }

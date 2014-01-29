@@ -14,18 +14,19 @@ public class TCPConnection {
     String ipAddress;
     int port;
 
-    public TCPConnection()
-    {
-        this.connected = false;
-        this.TCPClient = new TcpClient();
-    }
-
-    public bool connect(String ipAddress, int port)
+    public TCPConnection(String ipAddress, int port)
     {
         this.ipAddress = ipAddress;
         this.port = port;
+        this.connected = false;
+    }
+
+    public bool connect()
+    {
         try
         {
+            Console.WriteLine("TCP Client initialising.....");
+            this.TCPClient = new TcpClient();
             Console.WriteLine("TCP Client connecting.....");
             TCPClient.Connect(ipAddress, port);
             connected = true;
@@ -39,60 +40,39 @@ public class TCPConnection {
         return connected;
     }
 
-    public void reconnect()
-    {
-        try
-        {
-            Console.WriteLine("TCP Client reconnecting.....");
-            TCPClient.Connect(ipAddress, port);
-            connected = true;
-            Console.WriteLine("TCP Client reconnected");
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("TCP Client reconnection error..... " + e.StackTrace);
-        }
-    }
-
     public bool sendMessage(String message)
     {
         bool success = false;
-        Console.WriteLine("sending message via TCP...");
-        int tryCounter = 1;
-        while (!success && tryCounter < this.connectionTries)
+        Console.WriteLine("TCP client starting to send message...");
+        if (connected)
         {
-            if (connected)
+            try
             {
-                try
-                {
-                    Stream stm = TCPClient.GetStream();
+                Stream stm = TCPClient.GetStream();
 
-                    ASCIIEncoding asen = new ASCIIEncoding();
-                    byte[] ba = asen.GetBytes(message);
-                    Console.WriteLine("Transmitting.....");
+                ASCIIEncoding asen = new ASCIIEncoding();
+                byte[] ba = asen.GetBytes(message);
+                Console.WriteLine("TCP client sending message.....");
 
-                    stm.Write(ba, 0, ba.Length);
+                stm.Write(ba, 0, ba.Length);
 
-                    byte[] bb = new byte[100];
-                    int k = stm.Read(bb, 0, 100);
+                byte[] bb = new byte[100];
+                int k = stm.Read(bb, 0, 100);
 
-                    for (int i = 0; i < k; i++)
-                        Console.Write(Convert.ToChar(bb[i]));
-                    success = true;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("TCP Client cannot send message : " + ex.StackTrace);
-                    connected = false;
-                    success = false;
-                }
+                for (int i = 0; i < k; i++)
+                    Console.Write(Convert.ToChar(bb[i]));
+                success = true;
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine("TCP Client cannot send message : TCP client not connected. Trying reconnect number " + tryCounter);
-                this.reconnect();
+                Console.WriteLine("TCP Client cannot send message : " + ex.StackTrace);
+                connected = false;
+                success = false;
             }
-            tryCounter++;
+        }
+        else
+        {
+            Console.WriteLine("TCP Client cannot send message : TCP client not connected.");
         }
         return success;
     }
@@ -104,6 +84,7 @@ public class TCPConnection {
         {
             try
             {
+                Console.WriteLine("TCP Client trying to disconnect");
                 TCPClient.Close();
                 success = true;
                 Console.WriteLine("TCP Client disconnected");
@@ -115,9 +96,24 @@ public class TCPConnection {
         }
         else
         {
-            Console.WriteLine("TCP Client cannot disconnect : not connected yet");
+            Console.WriteLine("TCP Client cannot disconnect : is not connected");
         }
         return success;
     }
 
+    public bool connectSendMessageAndDisconnect(String message)
+    {
+        bool messageSent = false;
+
+        //Connect
+        this.connect();
+
+        //Send message
+        messageSent = this.sendMessage(message);
+
+        //Disconnect
+        this.disconnect();
+
+        return messageSent;
+    }
 }
