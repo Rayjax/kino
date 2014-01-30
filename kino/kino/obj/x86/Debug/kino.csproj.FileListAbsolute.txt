@@ -11,3 +11,18 @@ D:\Dev\Kino\kino\kino\obj\x86\Debug\kino.csproj.GenerateResource.Cache
 D:\Dev\Kino\kino\kino\obj\x86\Debug\kino.exe
 D:\Dev\Kino\kino\kino\obj\x86\Debug\kino.pdb
 D:\Dev\Kino\kino\kino\obj\x86\Debug\kino.csprojResolveAssemblyReference.cache
+Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\obj\x86\Debug\kino.exe
+Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\obj\x86\Debug\kino.pdb
+Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\bin\Debug\kino.exe
+Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\bin\Debug\kino.pdb
+Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\bin\Debug\Microsoft.Kinect.dll
+Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\bin\Debug\MjpegProcessor.dll
+Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\bin\Debug\Microsoft.Kinect.xml
+Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\obj\x86\Debug\kino.csprojResolveAssemblyReference.cache
+Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\obj\x86\Debug\MainWindow.baml
+Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\obj\x86\Debug\MainWindow.g.cs
+Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\obj\x86\Debug\App.g.cs
+Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\obj\x86\Debug\kino_MarkupCompile.cache
+Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\obj\x86\Debug\kino.g.resources
+Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\obj\x86\Debug\kino.Properties.Resources.resources
+Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\obj\x86\Debug\kino.csproj.GenerateResource.Cache

@@ -27,6 +27,8 @@ namespace kino
         bool commanderReady;
         KeyEventHandler keyboardEventHandler;
         bool listeningToKeyboardEvents;
+
+        private KinectControler kinectControler;
  
         public MainWindow()
         {
@@ -39,6 +41,23 @@ namespace kino
             //Init an handler for keyboard
             this.keyboardEventHandler = new KeyEventHandler(OnButtonKeyDown);
             listeningToKeyboardEvents = false;
+
+            try
+            {
+                kinectControler = new KinectControler();
+                //Init KinectControler handlers
+                this.kinectControler.NewControlDataIsReady += KinectControlerHasNewControl;
+                this.kinectControler.UserDetectionStatusChanged += KinectControlerUserDetectionStatusHasChanged;
+
+            }
+            catch (Exception ex)
+            {
+                button1.IsEnabled = false;
+                MessageBox.Show("Aucune Kinect n'a été détectée. Pour utiliser la Kinect avec l'application, connectez une Kinect puis relancez le logiciel");
+            }
+            
+
+            
         }
 
         private String getVideoStreamUrl(String IPAddress, int port){
@@ -49,6 +68,85 @@ namespace kino
         {
             //Update image on each new frame event
             videoStreamImage.Source = e.BitmapImage;
+        }
+
+        private void KinectControlerUserDetectionStatusHasChanged(object sender, UserDetectionStatusChangeEventArgs e)
+        {
+            String text = "";
+            switch (e.UserDetectionStatus)
+            {
+                case UserDetectionStatus.Detected:
+                    text = "";
+                    break;
+                case UserDetectionStatus.NotDetected:
+                    text = "Aucun utilisateur";
+                    break;
+                case UserDetectionStatus.PartiallyDetected:
+                    text = "Utilisateur hors champ";
+                    break;
+            }
+
+            labelKinectUserStatus.Content = text;
+        }
+
+        private int WORK_RATE = 6; //skeleton works at 30 fps, by skipping 6 frames we'll work at 5fps
+        private int frameCoutner = 0;
+        private Command lastCommandSent;
+        private void KinectControlerHasNewControl(object sender, ControlDataReadyEventArgs e)
+        {
+            if(frameCoutner<=0){
+                Console.WriteLine("Left : "+e.PowerLeft+", Right : "+e.PowerRight);
+
+                Command commandToSend = Command.stand;
+
+                
+                if (e.PowerLeft == 0 && e.PowerRight == 0)
+                {
+                    commandToSend = Command.stand;
+                    Console.WriteLine("Stand");
+                } else if (e.PowerLeft == 0 && e.PowerRight > 0)
+                {
+                    commandToSend = Command.right;
+                    Console.WriteLine("Right");
+                } else if (e.PowerLeft > 0 && e.PowerRight == 0)
+                {
+                    commandToSend = Command.left;
+                    Console.WriteLine("Left");
+                }
+                else if (e.PowerLeft > 0 && e.PowerRight > 0)
+                {
+                    commandToSend = Command.forward;
+                    Console.WriteLine("Forward");
+                }
+                else if (e.PowerLeft < 0 || e.PowerRight < 0)
+                {
+                    commandToSend = Command.backward;
+                    Console.WriteLine("Backward");
+                }
+                else
+                {
+                    commandToSend = Command.stand;
+                    Console.WriteLine("Default : stand");
+                }
+
+                if (this.commanderReady)
+                {
+                    if (commandToSend != lastCommandSent)
+                    {
+                        this.commander.sendCommand(commandToSend);
+                        lastCommandSent = commandToSend;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Trying to send command while commander isn't ready");
+                }
+
+                frameCoutner=WORK_RATE;
+            } else {
+                frameCoutner--;
+            }
+            
         }
 
         private void OnButtonKeyDown(object sender, KeyEventArgs e)
@@ -149,6 +247,30 @@ namespace kino
             {
                 MessageBox.Show("Connectez vous d'abord");
             }
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (kinectControler.IsStarted)
+                {
+                    kinectControler.Stop();
+                    Console.WriteLine("Arrêter Kinect");
+                    ((Button)sender).Content = "Démarrer Kinect";
+                }
+                else
+                {
+                    kinectControler.Start();
+                    Console.WriteLine("Démarrer Kinect");
+                    ((Button)sender).Content = "Arrêter Kinect";
+                }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show("Une erreur est survenue pendant l'initialisation de la Kinect");
+            }
+            
         }
     }
 }
