@@ -26,3 +26,17 @@ Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\obj\x86\Debug\kino_Marku
 Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\obj\x86\Debug\kino.g.resources
 Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\obj\x86\Debug\kino.Properties.Resources.resources
 Z:\Documents\Visual Studio 2012\Projects\kino\kino\kino\obj\x86\Debug\kino.csproj.GenerateResource.Cache
+D:\Dev\kino3\kino\kino\kino\obj\x86\Debug\kino.exe
+D:\Dev\kino3\kino\kino\kino\obj\x86\Debug\kino.pdb
+D:\Dev\kino3\kino\kino\kino\bin\Debug\kino.exe
+D:\Dev\kino3\kino\kino\kino\bin\Debug\kino.pdb
+D:\Dev\kino3\kino\kino\kino\bin\Debug\MjpegProcessor.dll
+D:\Dev\kino3\kino\kino\kino\bin\Debug\Microsoft.Kinect.xml
+D:\Dev\kino3\kino\kino\kino\obj\x86\Debug\kino.csprojResolveAssemblyReference.cache
+D:\Dev\kino3\kino\kino\kino\obj\x86\Debug\MainWindow.baml
+D:\Dev\kino3\kino\kino\kino\obj\x86\Debug\MainWindow.g.cs
+D:\Dev\kino3\kino\kino\kino\obj\x86\Debug\App.g.cs
+D:\Dev\kino3\kino\kino\kino\obj\x86\Debug\kino_MarkupCompile.cache
+D:\Dev\kino3\kino\kino\kino\obj\x86\Debug\kino.g.resources
+D:\Dev\kino3\kino\kino\kino\obj\x86\Debug\kino.Properties.Resources.resources
+D:\Dev\kino3\kino\kino\kino\obj\x86\Debug\kino.csproj.GenerateResource.Cache

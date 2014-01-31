@@ -90,11 +90,12 @@ namespace kino
         }
 
         private int WORK_RATE = 6; //skeleton works at 30 fps, by skipping 6 frames we'll work at 5fps
-        private int frameCoutner = 0;
+        private int frameCounter = 0;
         private Command lastCommandSent;
         private void KinectControlerHasNewControl(object sender, ControlDataReadyEventArgs e)
         {
-            if(frameCoutner<=0){
+            if (frameCounter <= 0)
+            {
                 Console.WriteLine("Left : "+e.PowerLeft+", Right : "+e.PowerRight);
 
                 Command commandToSend = Command.stand;
@@ -142,9 +143,9 @@ namespace kino
                     Console.WriteLine("Trying to send command while commander isn't ready");
                 }
 
-                frameCoutner=WORK_RATE;
+                frameCounter = WORK_RATE;
             } else {
-                frameCoutner--;
+                frameCounter--;
             }
             
         }

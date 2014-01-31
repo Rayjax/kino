@@ -221,7 +221,7 @@ namespace kino
             }
             else if (angleInDegree >= ANGLE_MAX_POWER_THRESHOLD && angleInDegree < ANGLE_REVERSE_THRESHOLD)
             {
-                //Max power, the angle is abose max power threshold (but under reverse threshold)
+                //Max power, the angle is above max power threshold (but under reverse threshold)
                 return 1.0d;
             }
             else
